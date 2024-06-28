@@ -4,21 +4,8 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField]
-    DinoData data;
-    [SerializeField]
-    float speed;
-    [SerializeField]
-    float anglerSpeed;
-
-    private void OnEnable()
-    {
-        speed = data.speed;
-        anglerSpeed = data.angluerSpeed;
-    }
-
     void FixedUpdate()
     {
-        transform.rotation *= Quaternion.Euler(Time.fixedDeltaTime * speed, Input.GetAxis("Horizontal") * anglerSpeed, 0);
+        transform.rotation *= Quaternion.Euler(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"), 0);
     }
 }
