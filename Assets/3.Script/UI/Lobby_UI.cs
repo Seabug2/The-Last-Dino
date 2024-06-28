@@ -11,7 +11,7 @@ public class Lobby_UI : MonoBehaviour
 
     private void Start()
     {
-        foreach(GameObject g in dinos)
+        foreach (GameObject g in dinos)
         {
             g.SetActive(false);
         }
@@ -27,18 +27,21 @@ public class Lobby_UI : MonoBehaviour
         dinos[choice_number].SetActive(true);
     }
 
-    public void GameStartbutton()
+    public void GameStartButton()
     {
-        for(int i = 0; i < dinos.Length; i++)
+        for (int i = 0; i < dinos.Length; i++)
         {
-            if(i.Equals(choice_number))
-            {
-
-            }
-            else
+            if (!i.Equals(choice_number))
             {
                 Destroy(dinos[i]);
             }
+            else
+            {
+                GameManager.instance.GameStart(dinos[i]);
+            }
         }
+
+        Destroy(gameObject);
+        return;
     }
 }

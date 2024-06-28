@@ -20,9 +20,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void GameStart(int _playerSelNum)
+    public void GameStart(GameObject _selected)
     {
-
+        Movement movement = _selected.transform.parent.gameObject.AddComponent<Movement>();
+        Camera.main.GetComponent<CameraController>().ShiftVirtualCam();
+        DinoData dinoData = Resources.Load<DinoData>($"Dino Data/{_selected.name}");
+        movement.SetData(dinoData);
     }
 
     //ΩÃ±€≈Ê

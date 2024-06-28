@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbb5a17710c4dc84684226ab5ea5b42a, type: 3}
   m_Name: Brachi
   m_EditorClassIdentifier: 
-  speed: 1
-  angluerSpeed: 5
+  speed: 0.66
+  angluerSpeed: 1
   meatTime: 2
   parasolTime: 3
   flightTime: 1
