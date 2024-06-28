@@ -5,27 +5,27 @@ using UnityEngine.UI;
 
 public class Lobby_UI : MonoBehaviour
 {
-    [SerializeField] GameObject[] dinos;
+    [SerializeField] GameObject[] character_obj;
 
     private int choice_number;
 
     private void Start()
     {
-        foreach(GameObject g in dinos)
+        foreach(GameObject obj in character_obj)
         {
-            g.SetActive(false);
+            obj.SetActive(false);
         }
 
-        choice_number = Random.Range(0, dinos.Length);
-        dinos[choice_number].SetActive(true);
+        choice_number = Random.Range(0, character_obj.Length);
+        character_obj[choice_number].SetActive(true);
     }
 
-    public void OnButton(int num)
+    public void OnButton(int number)
     {
-        dinos[choice_number].SetActive(false);
-        choice_number += num;
+        character_obj[choice_number].SetActive(false);
+        choice_number += number;
         choice_number = choice_number % 3;
-        dinos[choice_number].SetActive(true);
+        character_obj[choice_number].SetActive(true);
 
         Debug.Log(choice_number);
     }
