@@ -17,4 +17,10 @@ public class DinoData : ScriptableObject
 
     //체공 비행 지속 시간
     public float flightTime;
+
+    public Vector3 localCapPosition;
+    public Vector3 localCapScale;
+    
+    public Vector3 localParasolPosition;
+    public Vector3 localParasolScale;
 }

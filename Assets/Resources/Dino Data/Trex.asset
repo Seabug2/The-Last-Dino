@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Trex
   m_EditorClassIdentifier: 
   speed: 1
-  angluerSpeed: 0.7
+  angluerSpeed: 0.8
   meatTime: 3
   parasolTime: 1
   flightTime: 2

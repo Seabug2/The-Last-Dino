@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Archen
   m_EditorClassIdentifier: 
   speed: 1.5
-  angluerSpeed: 0.3
+  angluerSpeed: 0.5
   meatTime: 1
   parasolTime: 2
   flightTime: 3
