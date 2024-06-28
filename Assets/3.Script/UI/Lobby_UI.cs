@@ -15,7 +15,6 @@ public class Lobby_UI : MonoBehaviour
         {
             g.SetActive(false);
         }
-
         choice_number = Random.Range(0, dinos.Length);
         dinos[choice_number].SetActive(true);
     }
@@ -26,7 +25,16 @@ public class Lobby_UI : MonoBehaviour
         choice_number += num;
         choice_number = choice_number % 3;
         dinos[choice_number].SetActive(true);
+    }
 
-        Debug.Log(choice_number);
+    public void GameStartbutton()
+    {
+        for(int i = 0; i < dinos.Length; i++)
+        {
+            if(i != choice_number)
+            {
+                Destroy(dinos[i]);
+            }
+        }
     }
 }
