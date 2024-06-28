@@ -31,7 +31,11 @@ public class Lobby_UI : MonoBehaviour
     {
         for(int i = 0; i < dinos.Length; i++)
         {
-            if(i != choice_number)
+            if(i.Equals(choice_number))
+            {
+
+            }
+            else
             {
                 Destroy(dinos[i]);
             }
