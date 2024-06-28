@@ -2,17 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+    public enum State
+    {
+        Ready,
+        InGame,
+        GameOver
+    }
 
 public class GameManager : MonoBehaviour
 {
+
+    public State state = State.Ready;
+
     public static GameManager instance;
     private void Awake()
     {
         if (ReferenceEquals(instance, null))
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -20,8 +29,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    Animator blackBoard;
+    public float score;
 
     public void GameStart(Transform _selected)
     {   
@@ -33,33 +41,28 @@ public class GameManager : MonoBehaviour
         // Resources 폴더로부터 객체 이름으로 Data 파일을 불러온다.
         DinoData dinoData = Resources.Load<DinoData>($"Dino Data/{_selected.name}");
         movement.SetData(dinoData);
+        state = State.InGame;
+        StartAction?.Invoke();
     }
+
+    public event UnityAction StartAction;
+    public event UnityAction GameOverAction;
 
     public void GameOver(GameObject _dino)
     {
-        Destroy(_dino);
+        SceneManager.LoadScene(0);
+        //Destroy(_dino);
         //파티클
         //결과창
     }
 
-    public void Restart()
-    {
-        StartCoroutine(Restart_co());
-    }
+    //public void Restart()
+    //{
+    //    StartCoroutine(Restart_co());
+    //}
 
-    IEnumerator Restart_co()
-    {
-        blackBoard.SetTrigger("Fade Out");
-        
-        yield return null;
-        yield return new WaitWhile(()=> blackBoard.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
-
-        SceneManager.LoadScene(0);
-        blackBoard.SetTrigger("Fade In");
-
-        yield return null;
-        yield return new WaitWhile(()=> blackBoard.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
-        
-        blackBoard.gameObject.SetActive(false);
-    }
+    //IEnumerator Restart_co()
+    //{
+    //    SceneManager.LoadScene(0);
+    //}
 }
