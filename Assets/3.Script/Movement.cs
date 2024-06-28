@@ -7,18 +7,21 @@ public class Movement : MonoBehaviour
     [SerializeField]
     DinoData data;
     [SerializeField]
-    float speed;
+    float speed = 0;
     [SerializeField]
-    float anglerSpeed;
+    float anglerSpeed = 0;
 
-    private void OnEnable()
+    const float offset = 25;
+
+    public void SetData(DinoData _DinoData)
     {
+        data = _DinoData;
         speed = data.speed;
         anglerSpeed = data.angluerSpeed;
     }
 
     void FixedUpdate()
     {
-        transform.rotation *= Quaternion.Euler(Time.fixedDeltaTime * speed, Input.GetAxis("Horizontal") * anglerSpeed, 0);
+        transform.rotation *= Quaternion.Euler(Time.fixedDeltaTime * speed * offset, Input.GetAxis("Horizontal") * anglerSpeed, 0);
     }
 }
