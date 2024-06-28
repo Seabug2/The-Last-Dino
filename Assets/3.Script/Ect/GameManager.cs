@@ -24,11 +24,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-
-    }
-
     public void GameStart(GameObject _selected)
     {
         Movement movement = _selected.transform.parent.gameObject.AddComponent<Movement>();
@@ -39,6 +34,22 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
+        StartCoroutine(Restart_co());
+    }
+
+    IEnumerator Restart_co()
+    {
+        blackBoard.SetTrigger("Fade Out");
+        
+        yield return null;
+        yield return new WaitWhile(()=> blackBoard.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
+
         SceneManager.LoadScene(0);
+        blackBoard.SetTrigger("Fade In");
+
+        yield return null;
+        yield return new WaitWhile(()=> blackBoard.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
+        
+        blackBoard.gameObject.SetActive(false);
     }
 }
