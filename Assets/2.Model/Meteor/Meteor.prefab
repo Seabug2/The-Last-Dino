@@ -154,6 +154,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7434408288694202244}
     m_Modifications:
+    - target: {fileID: 54843695342881558, guid: 4803d60c85534f9429b20083fe5c3d21, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 55479426668908132, guid: 4803d60c85534f9429b20083fe5c3d21, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 55866269457534336, guid: 4803d60c85534f9429b20083fe5c3d21, type: 3}
       propertyPath: ShapeModule.type
       value: 4
