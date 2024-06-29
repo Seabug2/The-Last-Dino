@@ -395,10 +395,10 @@ GameObject:
   m_Component:
   - component: {fileID: 843434282}
   - component: {fileID: 843434281}
-  - component: {fileID: 843434283}
   - component: {fileID: 843434285}
   - component: {fileID: 843434286}
   - component: {fileID: 843434287}
+  - component: {fileID: 843434283}
   - component: {fileID: 843434284}
   m_Layer: 0
   m_Name: Game Manager

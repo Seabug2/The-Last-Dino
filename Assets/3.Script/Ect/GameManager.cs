@@ -13,7 +13,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
     public State state = State.Ready;
 
     public static GameManager instance;
@@ -36,7 +35,6 @@ public class GameManager : MonoBehaviour
     {   
         // 시네머신으로 가상 카메라를 바꾼다.
         Camera.main.GetComponent<CameraController>().ShiftVirtualCam();
-
         // 게임 시작시 선택된 공룡이 이동할 수 있게 부모 오브젝트에 Movement를 추가
         Movement movement = _selected.parent.gameObject.AddComponent<Movement>();
         // Resources 폴더로부터 객체 이름으로 Data 파일을 불러온다.
@@ -58,8 +56,13 @@ public class GameManager : MonoBehaviour
     public event UnityAction StartAction;
     public event UnityAction GameOverAction;
 
+    [SerializeField]
+    Animator blackBoard;
+
     public void RestartScene()
     {
         SceneManager.LoadScene(0);
     }
+
+
 }

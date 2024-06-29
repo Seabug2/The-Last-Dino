@@ -1,11 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MeteorSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject meteor;
-    // 운석 생성 간격
     [SerializeField] private float SpawnTime;
 
     [SerializeField]
@@ -15,7 +13,13 @@ public class MeteorSpawner : MonoBehaviour
     {
         GameManager.instance.StartAction += () =>
         {
-            StartCoroutine(MeteorSpawn_co());
+            StartCoroutine("MeteorSpawn_co");
+        };
+
+        GameManager.instance.GameOverAction += () =>
+        {
+            StopCoroutine("MeteorSpawn_co");
+            Destroy(this);
         };
     }
 
@@ -24,7 +28,15 @@ public class MeteorSpawner : MonoBehaviour
         WaitForSeconds wfs = new WaitForSeconds(SpawnTime);
         while (GameManager.instance.state.Equals(State.InGame))
         {
-            Instantiate(meteor, Random.onUnitSphere * respawnHeight, Quaternion.identity);
+            Vector3 respawnPoint = Random.onUnitSphere * respawnHeight;
+            Ray ray = new Ray(respawnPoint, (Vector3.zero - respawnPoint).normalized);
+            
+            if (Physics.Raycast(ray.origin, ray.direction, Mathf.Infinity, 1 << LayerMask.NameToLayer("Meteor")))
+            {
+                continue;
+            }
+
+            Instantiate(meteor, respawnPoint, Quaternion.identity);
             yield return wfs;
         }
     }

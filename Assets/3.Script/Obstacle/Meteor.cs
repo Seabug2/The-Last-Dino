@@ -21,7 +21,8 @@ public class Meteor : MonoBehaviour
     public Vector2 shakeScale = Vector2.one;
 
     const float impactRange = 25f;
-    const float delayTime = 10f;
+    const float explosionRange = 10;
+    const float delayTime = 30f;
 
     public GameObject collisionPointMark;
     public GameObject tails;
@@ -88,5 +89,11 @@ public class Meteor : MonoBehaviour
         // 지정된 시간 후에 폭발
         yield return new WaitForSeconds(delayTime);
         Explosion(transform.position);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, impactRange);
+        Gizmos.DrawWireSphere(transform.position, explosionRange);
     }
 }
