@@ -5,9 +5,7 @@ using UnityEngine;
 public class ItemSpawner : MonoBehaviour
 {
     public GameObject meat, propeller, umbrella;
-    private bool isMeat = false;
-    private bool ispropeller = false;
-    private bool isumbrella = false;
+    [SerializeField] private float delayTime = 10f;
 
     int count = 3;
     private SphereCollider area;
@@ -16,13 +14,21 @@ public class ItemSpawner : MonoBehaviour
     private void Start()
     {
         area = GetComponent<SphereCollider>();
-        //코루틴 시작
         ItemList.Add(meat);
         ItemList.Add(propeller);
         ItemList.Add(umbrella);
     }
+    private void Update()
+    {
+        if(itemSpawn !=null)
+        {
+            StopCoroutine(ItemSpawner_co(delayTime));
+        }
+         itemSpawn = StartCoroutine(ItemSpawner_co(delayTime));
+    }
+    Coroutine itemSpawn;
 
-    private IEnumerator (float delayTime)
+    private IEnumerator ItemSpawner_co(float delayTime)
     {
         for(int i = 0;i<count;i++)
         {
@@ -30,7 +36,9 @@ public class ItemSpawner : MonoBehaviour
             // GameObject instance = Instantiate(ItemList,spawnPos,Quaternion.identity)
 
             Vector3 randomPos = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized*43.5f;
-            GameObject instance = Instantiate(ItemList[Random.Range(0,ItemList.Count)], randomPos, Quaternion.identity);
+            Instantiate(ItemList[Random.Range(0,ItemList.Count)], randomPos, Quaternion.identity);
         }
+        yield return new WaitForSeconds(delayTime);
     }
+    
 }
