@@ -5,8 +5,9 @@ using UnityEngine;
 public class Meat : MonoBehaviour
 {
     // 고기 아이템은 획득시 이동속도가 올라간 듯한 반짝이는 파티클이 실행됨
-    GameObject prtc; //파티클
-
+    [SerializeField] GameObject prtc; //파티클
+   
+   
     // 공룡 캐릭터랑만 충돌
     // 플레이어와 충돌하면
     private void OnTriggerEnter(Collider other)
