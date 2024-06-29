@@ -12,7 +12,6 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        // Cinemachine Virtual Camera의 Noise 프로필 가져오기
         noise = inGameVirCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         originGainValue = noise.m_AmplitudeGain;
     }
@@ -40,4 +39,8 @@ public class CameraController : MonoBehaviour
         inGameVirCam.Priority = 100;
     }
 
+    public void DisconnectTrace()
+    {
+        inGameVirCam.transform.SetParent(null);
+    }
 }

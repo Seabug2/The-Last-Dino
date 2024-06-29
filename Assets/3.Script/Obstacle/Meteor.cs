@@ -1,76 +1,99 @@
+using System.Collections;
 using UnityEngine;
 
-// 오브젝트에 리지드 바디가 필수적으로 요구됩니다.
-[RequireComponent(typeof(Rigidbody))]
+
+[RequireComponent(typeof(Gravity))]
 public class Meteor : MonoBehaviour
 {
-    Rigidbody rb;
-
-    /// <summary>
-    /// x = 최소 크기
-    /// y = 최대 크기
-    /// </summary>
-    public Vector2 sizeRange = Vector2.one;
+    // 운석은 생성시 지구 (0,0,0)을 향해 이동한다
+    // 운석은 충돌 지역에 경고 마크를 띄운다
+    // 플레이어가 지구와 충돌시 게임이 끝난다
+    // 운석이 지구에 부딪히면 땅에 박히고
+    // 시간이 흐르면 폭발한다
+    // 폭발시 폭발 파티클을 생성한다.
+    // 플레이어가 폭발에 휘말리면 게임이 끝난다
 
     /// <summary>
     /// x = 흔들림 크기
     /// y = 흔들림 시간
     /// </summary>
+    [Tooltip("x = 흔들림 크기, y = 흔들림 시간")]
     public Vector2 shakeScale = Vector2.one;
 
-    const float impactRange = 15f;
+    const float impactRange = 25f;
+    const float explosionRange = 10;
+    const float delayTime = 30f;
 
-    /// <summary>
-    /// 운석이 떨어지는 속도
-    /// </summary>
-    public float speed;
+    public GameObject collisionPointMark;
+    public GameObject tails;
+    public GameObject explosion;
 
-    private void Awake()
+    private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        GameObject go = Instantiate(collisionPointMark);
+
+        transform.forward = (Vector3.zero - transform.position).normalized;
+
+        Ray ray = new Ray(transform.position, (Vector3.zero - transform.position).normalized);
+        if(Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, 100f, 1 << LayerMask.NameToLayer("Earth")))
+        {
+            go.transform.position = hit.point;
+        }
+        go.transform.up = (transform.position).normalized;
+        collisionPointMark = go;
     }
 
     /// <summary>
-    /// 활성화가 되면 항상 velocity를 초기화 합니다.
+    /// 운석과 부딪힐 수 있는 오브젝트는 공룡과 지구입니다.
     /// </summary>
-    private void OnEnable()
-    {
-        rb.velocity = Vector3.zero;
-    }
-
-    // 운석과 부딪힐 수 있는 오브젝트는 공룡과 지구입니다.
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
-        // 카메라 쉐이크
-        CameraController camCtrl = Camera.main.GetComponent<CameraController>();
-
-        //공룡과 부딪히면
         if (other.CompareTag("Dino"))
+        {
+            GameManager.instance.GameOver(other.gameObject);
+            Explosion(other.ClosestPoint(transform.position));
+        }
+        else
+        {
+            //지구와 부딪힌 경우 잠시 후 폭발
+            StartCoroutine(DelayedExplosion_co());
+        }
+
+        Destroy(collisionPointMark);
+    }
+
+    void NearGroundImpact(Vector3 _collisionPoint)
+    {
+        CameraController camCtrl = Camera.main.GetComponent<CameraController>();
+        if (!Physics.OverlapSphere(_collisionPoint, impactRange, 1 << LayerMask.NameToLayer("Dino")).Length.Equals(0))
         {
             camCtrl.StartShakeCam(shakeScale.x, shakeScale.y);
         }
-
-        //땅에 부딪히면
-        else
-        {
-            if (!Physics.OverlapSphere(other.ClosestPoint(transform.position), impactRange, 1 << LayerMask.NameToLayer("Dino")).Length.Equals(0))
-            {
-                shakeScale *= 0.5f;
-                camCtrl.StartShakeCam(shakeScale.x, shakeScale.y);
-            }
-
-            //크레이터 생성
-
-        }
-
-        // 충돌 이벤트를 실행하고 비활성화 합니다.
-        gameObject.SetActive(false);
     }
 
-
-    private void FixedUpdate()
+    void Explosion(Vector3 _collisionPoint)
     {
-        // 지구의 중심을 향해 이동합니다.
-        rb.AddForce((Vector3.zero - transform.position).normalized * speed, ForceMode.Acceleration);
+        GameObject p = Instantiate(explosion, transform.position, Quaternion.identity);
+        p.transform.up = transform.position.normalized;
+
+        NearGroundImpact(_collisionPoint);
+
+        Destroy(gameObject);
+    }
+
+    IEnumerator DelayedExplosion_co()
+    {
+        GetComponent<Gravity>().Stop();
+
+        // 지정된 시간 후에 폭발
+        yield return new WaitForSeconds(delayTime);
+        Explosion(transform.position);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, impactRange);
+        Gizmos.DrawWireSphere(transform.position, explosionRange);
     }
 }

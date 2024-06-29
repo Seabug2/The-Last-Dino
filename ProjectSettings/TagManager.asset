@@ -16,7 +16,7 @@ TagManager:
   - Earth
   - Item
   - Meteor
-  - Crator
+  - 
   - 
   - 
   - 
@@ -41,4 +41,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Particle
+    uniqueID: 4067034619
     locked: 0
