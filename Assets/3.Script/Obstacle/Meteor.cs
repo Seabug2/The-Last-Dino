@@ -1,31 +1,46 @@
+using System.Collections;
 using UnityEngine;
 
-// 오브젝트에 리지드 바디가 필수적으로 요구됩니다.
-[RequireComponent(typeof(Rigidbody))]
+
+[RequireComponent(typeof(Gravity))]
 public class Meteor : MonoBehaviour
 {
-    Rigidbody rb;
+    // 운석은 생성시 지구 (0,0,0)을 향해 이동한다
+    // 운석은 충돌 지역에 경고 마크를 띄운다
+    // 플레이어가 지구와 충돌시 게임이 끝난다
+    // 운석이 지구에 부딪히면 땅에 박히고
+    // 시간이 흐르면 폭발한다
+    // 폭발시 폭발 파티클을 생성한다.
+    // 플레이어가 폭발에 휘말리면 게임이 끝난다
 
     /// <summary>
     /// x = 흔들림 크기
     /// y = 흔들림 시간
     /// </summary>
+    [Tooltip("x = 흔들림 크기, y = 흔들림 시간")]
     public Vector2 shakeScale = Vector2.one;
 
-    const float impactRange = 18f;
+    const float impactRange = 25f;
+    const float delayTime = 10f;
 
-    /// <summary>
-    /// 운석이 떨어지는 속도
-    /// </summary>
-    public float speed;
+    public GameObject collisionPointMark;
+    public GameObject tails;
+    public GameObject explosion;
 
-    private void Awake()
+    private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-    }
+        GameObject go = Instantiate(collisionPointMark);
 
-    [SerializeField]
-    GameObject prtc;
+        transform.forward = (Vector3.zero - transform.position).normalized;
+
+        Ray ray = new Ray(transform.position, (Vector3.zero - transform.position).normalized);
+        if(Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, 100f, 1 << LayerMask.NameToLayer("Earth")))
+        {
+            go.transform.position = hit.point;
+        }
+        go.transform.up = (transform.position).normalized;
+        collisionPointMark = go;
+    }
 
     /// <summary>
     /// 운석과 부딪힐 수 있는 오브젝트는 공룡과 지구입니다.
@@ -33,23 +48,45 @@ public class Meteor : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
-        // 카메라 쉐이크
-        CameraController camCtrl = Camera.main.GetComponent<CameraController>();
-
-        if (!Physics.OverlapSphere(other.ClosestPoint(transform.position), impactRange, 1 << LayerMask.NameToLayer("Dino")).Length.Equals(0))
+        if (other.CompareTag("Dino"))
         {
-            shakeScale *= 0.5f;
-            camCtrl.StartShakeCam(shakeScale.x, shakeScale.y);
+            GameManager.instance.GameOver(other.gameObject);
+            Explosion(other.ClosestPoint(transform.position));
+        }
+        else
+        {
+            //지구와 부딪힌 경우 잠시 후 폭발
+            StartCoroutine(DelayedExplosion_co());
         }
 
-        GameObject p = Instantiate(prtc, transform.position, Quaternion.identity);
+        Destroy(collisionPointMark);
+    }
+
+    void NearGroundImpact(Vector3 _collisionPoint)
+    {
+        CameraController camCtrl = Camera.main.GetComponent<CameraController>();
+        if (!Physics.OverlapSphere(_collisionPoint, impactRange, 1 << LayerMask.NameToLayer("Dino")).Length.Equals(0))
+        {
+            camCtrl.StartShakeCam(shakeScale.x, shakeScale.y);
+        }
+    }
+
+    void Explosion(Vector3 _collisionPoint)
+    {
+        GameObject p = Instantiate(explosion, transform.position, Quaternion.identity);
         p.transform.up = transform.position.normalized;
+
+        NearGroundImpact(_collisionPoint);
 
         Destroy(gameObject);
     }
 
-    private void FixedUpdate()
+    IEnumerator DelayedExplosion_co()
     {
-        rb.AddForce((Vector3.zero - transform.position).normalized * speed, ForceMode.Acceleration);
+        GetComponent<Gravity>().Stop();
+
+        // 지정된 시간 후에 폭발
+        yield return new WaitForSeconds(delayTime);
+        Explosion(transform.position);
     }
 }

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public State state = State.Ready;
 
     public static GameManager instance;
+
     private void Awake()
     {
         if (ReferenceEquals(instance, null))
@@ -45,24 +46,20 @@ public class GameManager : MonoBehaviour
         StartAction?.Invoke();
     }
 
+    // 운석이 호출
+    public void GameOver(GameObject _dino)
+    {
+        state = State.GameOver;
+        Camera.main.GetComponent<CameraController>().DisconnectTrace();
+        Destroy(_dino.transform.gameObject);
+        GameOverAction?.Invoke();
+    }
+
     public event UnityAction StartAction;
     public event UnityAction GameOverAction;
 
-    public void GameOver(GameObject _dino)
+    public void RestartScene()
     {
         SceneManager.LoadScene(0);
-        //Destroy(_dino);
-        //파티클
-        //결과창
     }
-
-    //public void Restart()
-    //{
-    //    StartCoroutine(Restart_co());
-    //}
-
-    //IEnumerator Restart_co()
-    //{
-    //    SceneManager.LoadScene(0);
-    //}
 }

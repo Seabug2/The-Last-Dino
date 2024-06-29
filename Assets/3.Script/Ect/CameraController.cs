@@ -38,4 +38,9 @@ public class CameraController : MonoBehaviour
     {
         inGameVirCam.Priority = 100;
     }
+
+    public void DisconnectTrace()
+    {
+        inGameVirCam.transform.SetParent(null);
+    }
 }
