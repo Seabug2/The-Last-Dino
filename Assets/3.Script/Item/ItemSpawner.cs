@@ -38,6 +38,7 @@ public class ItemSpawner : MonoBehaviour
             Vector3 randomPos = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized*43.5f;
             Instantiate(ItemList[Random.Range(0,ItemList.Count)], randomPos, Quaternion.identity);
         }
+
         yield return new WaitForSeconds(delayTime);
     }
     
