@@ -43,25 +43,16 @@ public class GameResult : MonoBehaviour
     // 랭킹 등록용 메소드
     void RankInput(float score)
     {
-        for (int i = 1; i < 4; i++)
+        int nowRank = 4; // 일단 지금 순위는 4등
+        while (nowRank > 1) // 1등 되면 반복문 끝
         {
-            BestScore[i] = PlayerPrefs.GetFloat("Rank" + i.ToString()); // 저장된 최고 기록을 불러오기
-        }
-        int nowRank;
-        for (nowRank = 3; nowRank > 0; nowRank--) // 3등부터 1등까지
-        {
-            if (score < BestScore[nowRank])  // i등을 못 이겼으면 반복문 끝
+            if (score > BestScore[nowRank - 1]) // 윗 순위를 이겼는가?
             {
-                break;
+                PlayerPrefs.SetFloat("Rank" + nowRank.ToString(), BestScore[nowRank - 1]); // 윗 순위 기록 끌어내리고
+                nowRank--; // 지금 순위 하나 올라감
+                PlayerPrefs.SetFloat("Rank" + nowRank.ToString(), score); // 올라간 자리에 현재 기록 작성
             }
-            if (nowRank < 3) // 원래 1등(2등) 기록은 2등(3등)으로 옮기기 - 3등 기록은 그냥 삭제됨
-            {
-                PlayerPrefs.SetFloat("Rank" + (nowRank + 1).ToString(), BestScore[nowRank]); 
-            }
-        }
-        if (nowRank < 3) // (1~3등 이라면) 그 순위에 현재 기록 입력
-        {
-            PlayerPrefs.SetFloat("Rank" + (nowRank + 1).ToString(), score);
+            else break; // 못 이겼으면 반복문 끝
         }
     }
 
