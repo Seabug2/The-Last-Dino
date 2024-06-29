@@ -4,57 +4,44 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    // 타이머는 게임이 시작되면 시간을 측정하기 시작
-    // 게임이 종료되면 게임매니저에게 점수를 전달하고 임무 종료
-
     [SerializeField]
     Text timeText;
-
-    private void Awake()
-    {
-        timeText.gameObject.SetActive(false);
-    }
+    [SerializeField]
+    public float size1 = 25f; // 분과 초의 크기 설정 변수
+    [SerializeField]
+    public float size2 = 20f; // 밀리세컨드의 크기 설정 변수
 
     void Start()
     {
         GameManager.instance.StartAction += () =>
         {
-            StartCoroutine(CountTime_co());
+            StartCoroutine(CountTime());
         };
     }
 
-    IEnumerator CountTime_co()
+    IEnumerator CountTime()
     {
-        float score = 0;
         float startTime = Time.time;
-
         timeText.gameObject.SetActive(true);
-        timeText.text = score.ToString();
-        
-        while (GameManager.instance.state.Equals(State.InGame))
+
+        while (GameManager.instance.state == State.InGame)
         {
             yield return null;
-            score = Time.time - startTime;
-            timeText.text = "Time\n" + TimerConvert(score);
+            float elapsed = Time.time - startTime;
+            timeText.text = TimerConvert(elapsed, size1, size2);
         }
-        GameManager.instance.score = score;
-        timeText.gameObject.SetActive(false);
+
+        GameManager.instance.score = Time.time - startTime;
+        Destroy(timeText.gameObject);
         Destroy(this);
     }
 
-    // 시간 표시용 메소드 (00:00.00)
-    public static string TimerConvert(float timer)
+    public static string TimerConvert(float time, float size1, float size2)
     {
-        // 123.45678...
-        int min = (int)timer / 60; // 2
-        string min_str = min.ToString("00"); // "02"
+        int minutes = (int)time / 60;
+        int seconds = (int)time % 60;
+        int milliseconds = (int)(time * 100) % 100;
 
-        int sec = (int)timer % 60; // 3
-        string sec_str = sec.ToString("00"); // "3"
-
-        int ms = (int)(timer * 100) % 100; // 45
-        string ms_str = ms.ToString("00"); // "45"
-
-        return $"{min_str}:{sec_str}<size=25>.{ms_str}</size>"; // "02:03.45"
+        return $"<size={size1}>{minutes:00}:{seconds:00}</size><size={size2}>.{milliseconds:00}</size>";
     }
 }

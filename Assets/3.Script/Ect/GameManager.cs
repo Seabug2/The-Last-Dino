@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (ReferenceEquals(instance, null))
+        if (instance == null)
         {
             instance = this;
         }
