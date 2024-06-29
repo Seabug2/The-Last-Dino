@@ -37,26 +37,23 @@ public class Timer : MonoBehaviour
             score = Time.time - startTime;
             timeText.text = "Time\n" + TimerConvert(score);
         }
-
         GameManager.instance.score = score;
         timeText.gameObject.SetActive(false);
+        Destroy(this);
     }
 
     // 시간 표시용 메소드 (00:00.00)
-    string TimerConvert(float timer)
+    public static string TimerConvert(float timer)
     {
         // 123.45678...
         int min = (int)timer / 60; // 2
-        string min_str = min.ToString(); // "2"
-        if (min < 10) min_str = "0" + min_str; // "02"
+        string min_str = min.ToString("00"); // "02"
 
         int sec = (int)timer % 60; // 3
-        string sec_str = sec.ToString(); // "3"
-        if (sec < 10) sec_str = "0" + sec_str; // "03"
+        string sec_str = sec.ToString("00"); // "3"
 
         int ms = (int)(timer * 100) % 100; // 45
-        string ms_str = ms.ToString(); // "45"
-        if (ms < 10) ms_str = "0" + ms_str; // "45"
+        string ms_str = ms.ToString("00"); // "45"
 
         return $"{min_str}:{sec_str}<size=25>.{ms_str}</size>"; // "02:03.45"
     }
