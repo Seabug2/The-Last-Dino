@@ -40,7 +40,7 @@ public class Meteor : MonoBehaviour
         Ray ray = new Ray(transform.position, (Vector3.zero - transform.position).normalized);
         if(Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, 100f, 1 << LayerMask.NameToLayer("Earth")))
         {
-            go.transform.position = hit.point;
+            go.transform.position = (transform.position).normalized * 43.9f;
         }
         go.transform.up = (transform.position).normalized;
         collisionPointMark = go;
@@ -78,7 +78,8 @@ public class Meteor : MonoBehaviour
 
     void Explosion()
     {
-        GameObject p = Instantiate(explosion, transform.position, Quaternion.identity);
+        GameObject p = Instantiate(explosion);
+        p.transform.position = transform.position.normalized * 44.5f;
         p.transform.up = transform.position.normalized;
         Destroy(gameObject);
     }
@@ -91,6 +92,7 @@ public class Meteor : MonoBehaviour
         yield return new WaitForSeconds(delayTime);
         Explosion();
     }
+
     Vector3 vec = Vector3.zero;
     private void OnDrawGizmos()
     {
