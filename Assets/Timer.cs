@@ -35,7 +35,7 @@ public class Timer : MonoBehaviour
         {
             yield return null;
             score = Time.time - startTime;
-            timeText.text = TimerConvert(score);
+            timeText.text = "Time\n" + TimerConvert(score);
         }
 
         GameManager.instance.score = score;
@@ -58,6 +58,6 @@ public class Timer : MonoBehaviour
         string ms_str = ms.ToString(); // "45"
         if (ms < 10) ms_str = "0" + ms_str; // "45"
 
-        return $"{min_str}:{sec_str}.{ms_str}"; // "02:03.45"
+        return $"{min_str}:{sec_str}<size=25>.{ms_str}</size>"; // "02:03.45"
     }
 }
