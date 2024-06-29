@@ -59,8 +59,18 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     Animator blackBoard;
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     public void RestartScene()
     {
         SceneManager.LoadScene(0);
+    }
+
+    IEnumerator RestartScene_co()
+    {
+        yield return null;
     }
 }
