@@ -29,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7811355425653536062}
-  m_LocalRotation: {x: -0.00000003774895, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.06298542, y: 64.2, z: 11.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -127,7 +127,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc37e38e14e1a6a4f934ae16d26ff06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shakeScale: {x: 1, y: 1}
+  shakeScale: {x: 35, y: 0.27}
+  impactRange: 25
+  explosionRange: 10
+  delayTime: 30
   collisionPointMark: {fileID: 8959813645200022631, guid: 28d14e457f2dd6147b58d4b99a6c1157, type: 3}
   tails: {fileID: 7107956974491854404}
   explosion: {fileID: 227264478951622849, guid: 64dacc47807390447aa532b5a02a82b5, type: 3}
@@ -143,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9b922ffd1f12194fa72ebfefef83873, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 16
+  speed: 22.0725
 --- !u!1001 &6964512869198847060
 PrefabInstance:
   m_ObjectHideFlags: 0

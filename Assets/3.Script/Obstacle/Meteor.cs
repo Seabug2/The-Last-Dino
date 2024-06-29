@@ -20,9 +20,12 @@ public class Meteor : MonoBehaviour
     [Tooltip("x = 흔들림 크기, y = 흔들림 시간")]
     public Vector2 shakeScale = Vector2.one;
 
-    const float impactRange = 25f;
-    const float explosionRange = 10;
-    const float delayTime = 30f;
+    [SerializeField]
+    float impactRange = 25f;
+    [SerializeField]
+    float explosionRange = 10;
+    [SerializeField]
+    float delayTime = 30f;
 
     public GameObject collisionPointMark;
     public GameObject tails;
@@ -52,7 +55,7 @@ public class Meteor : MonoBehaviour
         if (other.CompareTag("Dino"))
         {
             GameManager.instance.GameOver(other.gameObject);
-            Explosion(other.ClosestPoint(transform.position));
+            Explosion();
         }
         else
         {
@@ -60,25 +63,23 @@ public class Meteor : MonoBehaviour
             StartCoroutine(DelayedExplosion_co());
         }
 
+        NearGroundImpact();
         Destroy(collisionPointMark);
     }
 
-    void NearGroundImpact(Vector3 _collisionPoint)
+    void NearGroundImpact()
     {
         CameraController camCtrl = Camera.main.GetComponent<CameraController>();
-        if (!Physics.OverlapSphere(_collisionPoint, impactRange, 1 << LayerMask.NameToLayer("Dino")).Length.Equals(0))
+        if (!Physics.OverlapSphere(transform.position, impactRange, 1 << LayerMask.NameToLayer("Dino")).Length.Equals(0))
         {
             camCtrl.StartShakeCam(shakeScale.x, shakeScale.y);
         }
     }
 
-    void Explosion(Vector3 _collisionPoint)
+    void Explosion()
     {
         GameObject p = Instantiate(explosion, transform.position, Quaternion.identity);
         p.transform.up = transform.position.normalized;
-
-        NearGroundImpact(_collisionPoint);
-
         Destroy(gameObject);
     }
 
@@ -88,9 +89,9 @@ public class Meteor : MonoBehaviour
 
         // 지정된 시간 후에 폭발
         yield return new WaitForSeconds(delayTime);
-        Explosion(transform.position);
+        Explosion();
     }
-
+    Vector3 vec = Vector3.zero;
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, impactRange);
