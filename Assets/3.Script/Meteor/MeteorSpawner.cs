@@ -44,10 +44,9 @@ public class MeteorSpawner : MonoBehaviour
     private IEnumerator MeteorSpawn_co()
     {
         GameObject m;
-        WaitForSeconds wfs = new WaitForSeconds(SpawnTime);
         while (GameManager.instance.state.Equals(State.InGame))
         {
-            yield return wfs;
+            yield return new WaitForSeconds(SpawnTime * Random.Range(.57f,1.2f));
 
             if (meteorList.Count.Equals(0))
             {
@@ -68,14 +67,23 @@ public class MeteorSpawner : MonoBehaviour
             }
             while (Physics.Raycast(ray.origin, ray.direction, Mathf.Infinity, 1 << LayerMask.NameToLayer("Meteor")));
 
+            m.transform.position = respawnPoint;
+            m.SetActive(true);
 
-            //Vector3 respawnPoint = Random.onUnitSphere * respawnHeight;
-            //Ray ray = new Ray(respawnPoint, (Vector3.zero - respawnPoint).normalized);
+            //款籍 滴 俺究 积己
+            if (!meteorList.Count.Equals(0))
+            {
+                m = meteorList[0];
+                meteorList.Remove(m);
+            }
+            else { continue; }
 
-            //if (Physics.Raycast(ray.origin, ray.direction, Mathf.Infinity, 1 << LayerMask.NameToLayer("Meteor")))
-            //{
-            //    continue;
-            //}
+            do
+            {
+                respawnPoint = Random.onUnitSphere * respawnHeight;
+                ray = new Ray(respawnPoint, (Vector3.zero - respawnPoint).normalized);
+            }
+            while (Physics.Raycast(ray.origin, ray.direction, Mathf.Infinity, 1 << LayerMask.NameToLayer("Meteor")));
 
             m.transform.position = respawnPoint;
             m.SetActive(true);
@@ -92,7 +100,7 @@ public class MeteorSpawner : MonoBehaviour
     Vector3 GetRespawnPosition()
     {
         int randX = Random.Range(xOffset, screenwidth - xOffset);
-        int randY = Random.Range(screenHeight, screenHeight + yOffset);
+        int randY = screenHeight + yOffset;
 
         // RandomScreenPosition
         Vector2 rsp = new Vector2(randX, randY);

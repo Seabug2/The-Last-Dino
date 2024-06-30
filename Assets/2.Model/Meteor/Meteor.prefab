@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc37e38e14e1a6a4f934ae16d26ff06b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shakeScale: {x: 35, y: 0.27}
+  shakeScale: {x: 12, y: 0.2}
   impactRange: 35
   explosionRange: 9.81
   delayTime: 30
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9b922ffd1f12194fa72ebfefef83873, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 22.0725
+  speed: 70
   rb: {fileID: 6964512870846105701}
 --- !u!114 &1252322625
 MonoBehaviour:
