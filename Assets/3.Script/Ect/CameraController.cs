@@ -12,6 +12,11 @@ public class CameraController : MonoBehaviour
     CinemachineBasicMultiChannelPerlin noise;
     float originGainValue;
 
+    private void Awake()
+    {
+        inGameVirCam.Priority = 0;
+    }
+
     void Start()
     {
         noise = inGameVirCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();

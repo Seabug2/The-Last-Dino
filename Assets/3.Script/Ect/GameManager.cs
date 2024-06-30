@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
         DinoData dinoData = Resources.Load<DinoData>($"Dino Data/{_selected.name}");
         movement.SetData(dinoData);
 
+        _selected.GetComponent<Dino>().movement = movement;
+
         state = State.InGame;
         StartAction?.Invoke();
     }

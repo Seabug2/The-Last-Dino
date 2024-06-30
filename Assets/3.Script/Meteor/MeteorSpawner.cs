@@ -41,6 +41,8 @@ public class MeteorSpawner : MonoBehaviour
         };
     }
 
+    public LayerMask layersToCheck;
+
     private IEnumerator MeteorSpawn_co()
     {
         GameObject m;
@@ -65,28 +67,28 @@ public class MeteorSpawner : MonoBehaviour
                 respawnPoint = GetRespawnPosition();
                 ray = new Ray(respawnPoint, (Vector3.zero - respawnPoint).normalized);
             }
-            while (Physics.Raycast(ray.origin, ray.direction, Mathf.Infinity, 1 << LayerMask.NameToLayer("Meteor")));
+            while (Physics.Raycast(ray.origin, ray.direction, Mathf.Infinity, layersToCheck));
 
             m.transform.position = respawnPoint;
             m.SetActive(true);
 
-            //款籍 滴 俺究 积己
-            if (!meteorList.Count.Equals(0))
-            {
-                m = meteorList[0];
-                meteorList.Remove(m);
-            }
-            else { continue; }
+            ////款籍 滴 俺究 积己
+            //if (!meteorList.Count.Equals(0))
+            //{
+            //    m = meteorList[0];
+            //    meteorList.Remove(m);
+            //}
+            //else { continue; }
 
-            do
-            {
-                respawnPoint = Random.onUnitSphere * respawnHeight;
-                ray = new Ray(respawnPoint, (Vector3.zero - respawnPoint).normalized);
-            }
-            while (Physics.Raycast(ray.origin, ray.direction, Mathf.Infinity, 1 << LayerMask.NameToLayer("Meteor")));
+            //do
+            //{
+            //    respawnPoint = Random.onUnitSphere * respawnHeight;
+            //    ray = new Ray(respawnPoint, (Vector3.zero - respawnPoint).normalized);
+            //}
+            //while (Physics.Raycast(ray.origin, ray.direction, Mathf.Infinity, 1 << LayerMask.NameToLayer("Meteor")));
 
-            m.transform.position = respawnPoint;
-            m.SetActive(true);
+            //m.transform.position = respawnPoint;
+            //m.SetActive(true);
         }
     }
 

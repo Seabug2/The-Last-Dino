@@ -9,9 +9,7 @@ public class Movement : MonoBehaviour
 
     public DinoData Data { get { return data; } }
     
-    [SerializeField]
-    float speed = 0;
-    [SerializeField]
+    public float speed = 0;
     float anglerSpeed = 0;
 
     const float offset = 10;

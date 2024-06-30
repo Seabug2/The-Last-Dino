@@ -1344,6 +1344,7 @@ GameObject:
   - component: {fileID: 6589125444520199897}
   - component: {fileID: 6589125444520199896}
   - component: {fileID: 919132148321856897}
+  - component: {fileID: 919132148321856894}
   m_Layer: 6
   m_Name: Trex
   m_TagString: Dino
@@ -1512,6 +1513,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &919132148321856894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6589125444520199899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaf01de025a63044e962020f0052aa24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  propeller: {fileID: 5264555664763805102}
+  umbrella: {fileID: 6668304741734499882}
+  getPrtc: {fileID: 0}
+  movement: {fileID: 0}
+  flightHeight: 5
+  additionalSpeed: 3
 --- !u!1 &6668304741734499882
 GameObject:
   m_ObjectHideFlags: 0
@@ -1530,7 +1549,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6668304741734499887
 Transform:
   m_ObjectHideFlags: 0

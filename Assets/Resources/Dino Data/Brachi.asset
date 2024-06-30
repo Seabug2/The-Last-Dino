@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Brachi
   m_EditorClassIdentifier: 
   speed: 4
-  angluerSpeed: 0.5
-  meatTime: 2
-  parasolTime: 3
-  flightTime: 1
+  angluerSpeed: 0.7
+  meatTime: 4
+  parasolTime: 5
+  flightTime: 3
