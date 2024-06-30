@@ -2520,6 +2520,11 @@ MonoBehaviour:
   meteor: {fileID: 7811355425653536062, guid: e8cb4413ced1158479022750abe631a4, type: 3}
   SpawnTime: 2
   respawnHeight: 80
+  screenwidth: 0
+  xOffset: 300
+  screenHeight: 0
+  yOffset: 0
+  distanceFromCamera: 100
 --- !u!114 &843434287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3106,6 +3111,72 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1003601097}
   m_CullTransparentMesh: 1
+--- !u!1001 &1026021244
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1961840082}
+    m_Modifications:
+    - target: {fileID: 7434408288694202244, guid: e8cb4413ced1158479022750abe631a4, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434408288694202244, guid: e8cb4413ced1158479022750abe631a4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434408288694202244, guid: e8cb4413ced1158479022750abe631a4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 24.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434408288694202244, guid: e8cb4413ced1158479022750abe631a4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 26.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434408288694202244, guid: e8cb4413ced1158479022750abe631a4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434408288694202244, guid: e8cb4413ced1158479022750abe631a4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434408288694202244, guid: e8cb4413ced1158479022750abe631a4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434408288694202244, guid: e8cb4413ced1158479022750abe631a4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434408288694202244, guid: e8cb4413ced1158479022750abe631a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434408288694202244, guid: e8cb4413ced1158479022750abe631a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7434408288694202244, guid: e8cb4413ced1158479022750abe631a4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7811355425653536062, guid: e8cb4413ced1158479022750abe631a4, type: 3}
+      propertyPath: m_Name
+      value: Meteor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7811355425653536062, guid: e8cb4413ced1158479022750abe631a4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e8cb4413ced1158479022750abe631a4, type: 3}
+--- !u!4 &1026021245 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7434408288694202244, guid: e8cb4413ced1158479022750abe631a4, type: 3}
+  m_PrefabInstance: {fileID: 1026021244}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1037214604
 GameObject:
   m_ObjectHideFlags: 0
@@ -7313,6 +7384,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 817285786}
+  - {fileID: 1026021245}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 63, y: 0, z: 0}

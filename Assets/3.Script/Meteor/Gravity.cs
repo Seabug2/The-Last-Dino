@@ -9,7 +9,7 @@ public class Gravity : MonoBehaviour
     /// </summary>
     public float speed;
 
-    Rigidbody rb;
+    public Rigidbody rb;
 
     private void Awake()
     {

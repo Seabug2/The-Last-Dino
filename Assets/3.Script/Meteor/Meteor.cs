@@ -39,7 +39,7 @@ public class Meteor : MonoBehaviour
     private void OnEnable()
     {
         transform.forward = (Vector3.zero - transform.position).normalized;
-
+        gravity.Init();
         Ray ray = new Ray(transform.position, (Vector3.zero - transform.position).normalized);
         if(Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, 100f, 1 << LayerMask.NameToLayer("Earth")))
         {
@@ -47,6 +47,7 @@ public class Meteor : MonoBehaviour
         }
         collisionPointMark.transform.up = (transform.position).normalized;
         collisionPointMark.SetActive(true);
+        collisionPointMark.transform.SetParent(null);
     }
 
     /// <summary>
@@ -57,7 +58,6 @@ public class Meteor : MonoBehaviour
     {
         if (other.CompareTag("Dino"))
         {
-            GameManager.instance.GameOver(other.gameObject);
             Explosion();
         }
         else
@@ -82,17 +82,29 @@ public class Meteor : MonoBehaviour
     void Explosion()
     {
         GameObject p = Instantiate(explosion);
-        p.transform.position = transform.position.normalized * 45f;
+        p.transform.position = transform.position.normalized * 44.8f;
         p.transform.up = transform.position.normalized;
+        
+        //폭발 범위 내에 캐릭터가 있으면 게임오버
+        CameraController camCtrl = Camera.main.GetComponent<CameraController>();
+
+        Collider[] cols = Physics.OverlapSphere(transform.position, explosionRange, 1 << LayerMask.NameToLayer("Dino"));
+
+        if (cols.Length > 0)
+        {
+            camCtrl.StartShakeCam(shakeScale.x, shakeScale.y);
+            GameManager.instance.GameOver(cols[0].transform);
+        }
+
         gameObject.SetActive(false);
     }
 
     IEnumerator DelayedExplosion_co()
     {
-        GetComponent<Gravity>().Stop();
-
+        gravity.Stop();
+        float rand = Random.Range(.5f, 1f);
         // 지정된 시간 후에 폭발
-        yield return new WaitForSeconds(delayTime);
+        yield return new WaitForSeconds(delayTime * rand);
         Explosion();
     }
 

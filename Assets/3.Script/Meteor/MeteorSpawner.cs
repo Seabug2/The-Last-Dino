@@ -11,8 +11,24 @@ public class MeteorSpawner : MonoBehaviour
     [SerializeField]
     float respawnHeight = 1;
 
+    /// <summary>
+    /// 화면 가로
+    /// </summary>
+    [SerializeField] int screenwidth, xOffset;
+    /// <summary>
+    /// 화면 높이
+    /// </summary>
+    [SerializeField] int screenHeight, yOffset;
+    /// <summary>
+    /// 운석을 생성할 거리
+    /// </summary>
+    [SerializeField] float distanceFromCamera = 10f;
+
     private void Start()
     {
+        screenwidth = Screen.width;
+        screenHeight= Screen.height;
+
         GameManager.instance.StartAction += () =>
         {
             StartCoroutine("MeteorSpawn_co");
@@ -43,13 +59,23 @@ public class MeteorSpawner : MonoBehaviour
                 meteorList.Remove(m);
             }
 
-            Vector3 respawnPoint = Random.onUnitSphere * respawnHeight;
-            Ray ray = new Ray(respawnPoint, (Vector3.zero - respawnPoint).normalized);
-            
-            if (Physics.Raycast(ray.origin, ray.direction, Mathf.Infinity, 1 << LayerMask.NameToLayer("Meteor")))
+            Ray ray;
+            Vector3 respawnPoint;
+            do
             {
-                continue;
+                respawnPoint = GetRespawnPosition();
+                ray = new Ray(respawnPoint, (Vector3.zero - respawnPoint).normalized);
             }
+            while (Physics.Raycast(ray.origin, ray.direction, Mathf.Infinity, 1 << LayerMask.NameToLayer("Meteor")));
+
+
+            //Vector3 respawnPoint = Random.onUnitSphere * respawnHeight;
+            //Ray ray = new Ray(respawnPoint, (Vector3.zero - respawnPoint).normalized);
+
+            //if (Physics.Raycast(ray.origin, ray.direction, Mathf.Infinity, 1 << LayerMask.NameToLayer("Meteor")))
+            //{
+            //    continue;
+            //}
 
             m.transform.position = respawnPoint;
             m.SetActive(true);
@@ -61,5 +87,20 @@ public class MeteorSpawner : MonoBehaviour
         GameObject go = Instantiate(meteor);
         go.GetComponent<ReturnList>().SetMyList(this.meteorList);
         return go;
+    }
+
+    Vector3 GetRespawnPosition()
+    {
+        int randX = Random.Range(xOffset, screenwidth - xOffset);
+        int randY = Random.Range(screenHeight, screenHeight + yOffset);
+
+        // RandomScreenPosition
+        Vector2 rsp = new Vector2(randX, randY);
+        Ray ray = Camera.main.ScreenPointToRay(rsp);
+
+        float rand = Random.Range(.8f, 1.2f);
+        Vector3 rayPoint = ray.GetPoint(distanceFromCamera + rand);
+
+        return rayPoint;
     }
 }

@@ -46,11 +46,11 @@ public class GameManager : MonoBehaviour
     }
 
     // 운석이 호출
-    public void GameOver(GameObject _dino)
+    public void GameOver(Transform _dino)
     {
         state = State.GameOver;
         Camera.main.GetComponent<CameraController>().DisconnectTrace();
-        Destroy(_dino.transform.gameObject);
+        Destroy(_dino.parent.gameObject);
         GameOverAction?.Invoke();
     }
 
