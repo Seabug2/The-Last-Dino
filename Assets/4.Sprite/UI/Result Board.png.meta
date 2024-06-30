@@ -47,6 +47,9 @@ TextureImporter:
   - first:
       213: 3840496623451337931
     second: Result Board_14
+  - first:
+      213: -6913640651885480557
+    second: Result Board_15
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -163,12 +166,12 @@ TextureImporter:
       name: Result Board_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 1799
-        width: 393
-        height: 249
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 46
+        y: 1839
+        width: 316
+        height: 170
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -184,12 +187,12 @@ TextureImporter:
       name: Result Board_1
       rect:
         serializedVersion: 2
-        x: 471
-        y: 1734
-        width: 306
-        height: 276
+        x: 549
+        y: 1615
+        width: 325
+        height: 370
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -210,7 +213,7 @@ TextureImporter:
         width: 1024
         height: 1024
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -226,12 +229,12 @@ TextureImporter:
       name: Result Board_3
       rect:
         serializedVersion: 2
-        x: 8
-        y: 1503
-        width: 431
-        height: 248
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 46
+        y: 1542
+        width: 354
+        height: 170
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -247,12 +250,12 @@ TextureImporter:
       name: Result Board_4
       rect:
         serializedVersion: 2
-        x: 479
-        y: 1162
-        width: 461
-        height: 496
+        x: 534
+        y: 1208
+        width: 387
+        height: 342
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -268,12 +271,12 @@ TextureImporter:
       name: Result Board_5
       rect:
         serializedVersion: 2
-        x: 8
-        y: 1205
-        width: 425
-        height: 249
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 46
+        y: 1244
+        width: 348
+        height: 170
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -289,12 +292,12 @@ TextureImporter:
       name: Result Board_6
       rect:
         serializedVersion: 2
-        x: 32
-        y: 754
-        width: 506
-        height: 412
+        x: 82
+        y: 988
+        width: 860
+        height: 152
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -310,12 +313,12 @@ TextureImporter:
       name: Result Board_7
       rect:
         serializedVersion: 2
-        x: 599
-        y: 726
-        width: 326
-        height: 371
+        x: 13
+        y: 754
+        width: 1055
+        height: 170
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -331,12 +334,12 @@ TextureImporter:
       name: Result Board_8
       rect:
         serializedVersion: 2
-        x: 1195
-        y: 670
-        width: 821
+        x: 1169
+        y: 632
+        width: 820
         height: 323
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -357,7 +360,7 @@ TextureImporter:
         width: 325
         height: 325
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -373,12 +376,12 @@ TextureImporter:
       name: Result Board_10
       rect:
         serializedVersion: 2
-        x: 464
-        y: 434
-        width: 287
-        height: 255
+        x: 398
+        y: 97
+        width: 461
+        height: 496
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -394,12 +397,12 @@ TextureImporter:
       name: Result Board_11
       rect:
         serializedVersion: 2
-        x: 905
-        y: 293
-        width: 399
-        height: 393
+        x: 1057
+        y: 337
+        width: 287
+        height: 255
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -415,12 +418,12 @@ TextureImporter:
       name: Result Board_12
       rect:
         serializedVersion: 2
-        x: 929
-        y: 0
-        width: 1085
-        height: 667
+        x: 1537
+        y: 231
+        width: 438
+        height: 400
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -441,7 +444,7 @@ TextureImporter:
         width: 325
         height: 325
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -457,12 +460,12 @@ TextureImporter:
       name: Result Board_14
       rect:
         serializedVersion: 2
-        x: 464
-        y: 19
-        width: 387
-        height: 342
+        x: 970
+        y: 37
+        width: 1008
+        height: 169
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

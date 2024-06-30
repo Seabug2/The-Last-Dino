@@ -49,7 +49,6 @@ public class GameResult : MonoBehaviour
             PlayerPrefs.SetFloat($"Rank{i}", bestScores[i]);
             bestScoreTexts[i].text = Timer.TimerConvert(bestScores[i]);
         }
-
         resultBoard.SetActive(true);
     }
 

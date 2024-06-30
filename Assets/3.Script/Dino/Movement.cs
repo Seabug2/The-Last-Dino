@@ -6,6 +6,9 @@ public class Movement : MonoBehaviour
 {
     [SerializeField]
     DinoData data;
+
+    public DinoData Data { get { return data; } }
+    
     [SerializeField]
     float speed = 0;
     [SerializeField]

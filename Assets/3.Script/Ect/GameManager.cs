@@ -1,7 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
     public enum State
@@ -61,7 +62,13 @@ public class GameManager : MonoBehaviour
 
     public void QuitGame()
     {
+#if UNITY_EDITOR
+            // If we are running in the editor, stop playing the scene
+            EditorApplication.isPlaying = false;
+#else
+        // If we are running in a build, quit the application
         Application.Quit();
+#endif
     }
 
     public void RestartScene()
