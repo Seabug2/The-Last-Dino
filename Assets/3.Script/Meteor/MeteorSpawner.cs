@@ -27,10 +27,12 @@ public class MeteorSpawner : MonoBehaviour
 
     private IEnumerator MeteorSpawn_co()
     {
-        WaitForSeconds wfs = new WaitForSeconds(SpawnTime);
         GameObject m;
+        WaitForSeconds wfs = new WaitForSeconds(SpawnTime);
         while (GameManager.instance.state.Equals(State.InGame))
         {
+            yield return wfs;
+
             if (meteorList.Count.Equals(0))
             {
                 m = InstanceMeteor(); 
@@ -51,8 +53,6 @@ public class MeteorSpawner : MonoBehaviour
 
             m.transform.position = respawnPoint;
             m.SetActive(true);
-            
-            yield return wfs;
         }
     }
 

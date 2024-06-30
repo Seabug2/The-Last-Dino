@@ -17,5 +17,4 @@ public class ReturnList : MonoBehaviour
         else
             Destroy(gameObject);
     }
- 
 }

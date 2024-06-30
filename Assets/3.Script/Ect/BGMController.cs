@@ -6,11 +6,17 @@ using UnityEngine;
 public class BGMController : MonoBehaviour
 {
     AudioSource audioSource;
-    
-    [SerializeField]
-    AudioClip lobbyClip, InGameClip, gameOverClip;
+
+    /// <summary>
+    /// 0 : lobbyClip
+    /// 1 : InGameClip
+    /// 2 : gameOverClip
+    /// </summary>
+    [SerializeField, Tooltip("indet/0 = 시작화면 BGM, 1 = 플레이 화면 BGM, 2 = 결과화면 BGM")]
+    AudioClip[] bgms;
 
     public static BGMController instance;
+
     private void Awake()
     {
         if (instance == null)
@@ -30,45 +36,51 @@ public class BGMController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioSource.playOnAwake = true;
         audioSource.loop = true;
-
-        PlayAudio(lobbyClip);
+        PlayBGM(0);
     }
 
     private void Start()
     {
+        PlayBGM(0);
+
         GameManager.instance.StartAction += () =>
         {
-            PlayAudio(InGameClip);
+            PlayBGM(1);
         };
-        
+
         GameManager.instance.GameOverAction += () =>
         {
-            PlayAudio(gameOverClip);
+            PlayBGM(2);
         };
     }
 
-
-    public void BGMPlayingToggle()
+    public void PauseBGM()
     {
-        if (audioSource.isPlaying)
-        {
-            audioSource.Stop();
-        }
-        else
-        {
-            audioSource.Play();
-        }
+        if (!audioSource.isPlaying)
+            audioSource.UnPause();
     }
 
-    public void VolumeSet()
+    /// <summary>
+    /// 
+    /// </summary>
+    public void UnpauseBGM()
     {
-        audioSource.volume = PlayerPrefs.GetFloat("BGM Volume", 1);
+        if (!audioSource.isPlaying)
+            audioSource.UnPause();
     }
 
-    void PlayAudio(AudioClip _clip)
+    public void VolumeSet(int _num)
     {
-        audioSource.Stop();
-        audioSource.clip = _clip;
+        audioSource.volume = PlayerPrefs.GetFloat($"Volume {_num}", 1);
+    }
+    public void VolumeSet(float _value)
+    {
+        audioSource.volume = _value;
+    }
+    void PlayBGM(int _bgmNum)
+    {
+        VolumeSet(_bgmNum);
+        audioSource.clip = bgms[_bgmNum];
         audioSource.Play();
     }
 }

@@ -11,7 +11,7 @@ public class Gravity : MonoBehaviour
 
     Rigidbody rb;
 
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
@@ -26,5 +26,11 @@ public class Gravity : MonoBehaviour
     private void FixedUpdate()
     {
         rb.AddForce((Vector3.zero - transform.position).normalized * speed, ForceMode.Acceleration);
+    }
+
+    public void Init()
+    {
+        rb.isKinematic = false;
+        this.enabled = true;
     }
 }

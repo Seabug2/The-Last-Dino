@@ -29,13 +29,19 @@ public class Meteor : MonoBehaviour
 
     public GameObject explosion;
     public GameObject collisionPointMark;
-    
+
+    Gravity gravity;
+    private void Awake()
+    {
+        gravity = GetComponent<Gravity>();
+    }
+
     private void OnEnable()
     {
         transform.forward = (Vector3.zero - transform.position).normalized;
 
         Ray ray = new Ray(transform.position, (Vector3.zero - transform.position).normalized);
-        if(Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, Mathf.Infinity, 1 << LayerMask.NameToLayer("Earth")))
+        if(Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, 100f, 1 << LayerMask.NameToLayer("Earth")))
         {
             collisionPointMark.transform.position = (transform.position).normalized * 45f;
         }

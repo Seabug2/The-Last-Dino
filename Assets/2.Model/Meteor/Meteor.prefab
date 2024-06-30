@@ -22,7 +22,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7434408288694202244
 Transform:
   m_ObjectHideFlags: 0
@@ -134,7 +134,7 @@ MonoBehaviour:
   explosionRange: 9.81
   delayTime: 30
   explosion: {fileID: 227264478951622849, guid: 64dacc47807390447aa532b5a02a82b5, type: 3}
-  collisionPointMark: {fileID: 8959813645200022631, guid: 28d14e457f2dd6147b58d4b99a6c1157, type: 3}
+  collisionPointMark: {fileID: 903175773402691215}
 --- !u!114 &6964512870846105696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,6 +307,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28d14e457f2dd6147b58d4b99a6c1157, type: 3}
+--- !u!1 &903175773402691215 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8959813645200022631, guid: 28d14e457f2dd6147b58d4b99a6c1157, type: 3}
+  m_PrefabInstance: {fileID: 8133253118704986856}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &559406469000703029 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8582866547350439645, guid: 28d14e457f2dd6147b58d4b99a6c1157, type: 3}
