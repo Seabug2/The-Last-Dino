@@ -12,7 +12,10 @@ public class ReturnList : MonoBehaviour
     }
     private void OnDisable()
     {
-        myList.Add(gameObject);
+        if (myList != null)
+            myList.Add(gameObject);
+        else
+            Destroy(gameObject);
     }
  
 }

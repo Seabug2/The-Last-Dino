@@ -7,16 +7,16 @@ public class Setting_UI : MonoBehaviour
 {
     [SerializeField] Button tutorial_button;
 
+    /// <summary>
+    /// 켜고 쓰고 싶은 대상
+    /// </summary>
     [SerializeField] GameObject setting_obj;
 
     bool on_off = false;
 
     public void On_click_setting()
     {
-        on_off = !on_off;
-
-        setting_obj.SetActive(on_off);
-
-        tutorial_button.interactable = !on_off;
+        setting_obj.SetActive(!setting_obj.activeSelf);
+        tutorial_button.interactable = !tutorial_button.interactable;
     }
 }

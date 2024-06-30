@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbb5a17710c4dc84684226ab5ea5b42a, type: 3}
   m_Name: Archen
   m_EditorClassIdentifier: 
-  speed: 1.5
-  angluerSpeed: 0.5
+  speed: 11
+  angluerSpeed: 2
   meatTime: 1
   parasolTime: 2
   flightTime: 3

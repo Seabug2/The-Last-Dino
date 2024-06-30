@@ -9,6 +9,7 @@ public class Timer : MonoBehaviour
 
     void Start()
     {
+        timeText.gameObject.SetActive(false);
         GameManager.instance.StartAction += () =>
         {
             StartCoroutine(CountTime());

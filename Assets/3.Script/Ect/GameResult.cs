@@ -13,13 +13,9 @@ public class GameResult : MonoBehaviour
     [SerializeField]
     float popupDelayTime;
 
-    private void Awake()
-    {
-        resultBoard.SetActive(false);
-    }
-
     private void Start()
     {
+        resultBoard.SetActive(false);
         GameManager.instance.GameOverAction += () =>
         {
             Invoke("RankingCheck", popupDelayTime);

@@ -1,9 +1,11 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MeteorSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject meteor;
+    List<GameObject> meteorList = new List<GameObject>();
     [SerializeField] private float SpawnTime;
 
     [SerializeField]
@@ -26,8 +28,19 @@ public class MeteorSpawner : MonoBehaviour
     private IEnumerator MeteorSpawn_co()
     {
         WaitForSeconds wfs = new WaitForSeconds(SpawnTime);
+        GameObject m;
         while (GameManager.instance.state.Equals(State.InGame))
         {
+            if (meteorList.Count.Equals(0))
+            {
+                m = InstanceMeteor(); 
+            }
+            else
+            {
+                m = meteorList[0];
+                meteorList.Remove(m);
+            }
+
             Vector3 respawnPoint = Random.onUnitSphere * respawnHeight;
             Ray ray = new Ray(respawnPoint, (Vector3.zero - respawnPoint).normalized);
             
@@ -36,8 +49,17 @@ public class MeteorSpawner : MonoBehaviour
                 continue;
             }
 
-            Instantiate(meteor, respawnPoint, Quaternion.identity);
+            m.transform.position = respawnPoint;
+            m.SetActive(true);
+            
             yield return wfs;
         }
+    }
+
+    GameObject InstanceMeteor()
+    {
+        GameObject go = Instantiate(meteor);
+        go.GetComponent<ReturnList>().SetMyList(this.meteorList);
+        return go;
     }
 }

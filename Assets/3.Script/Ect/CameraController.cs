@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class CameraController : MonoBehaviour
 {
@@ -14,8 +16,6 @@ public class CameraController : MonoBehaviour
     {
         noise = inGameVirCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         originGainValue = noise.m_AmplitudeGain;
-        
-        print(originGainValue);
     }
 
     public void StartShakeCam(float _size, float _time)
@@ -43,11 +43,7 @@ public class CameraController : MonoBehaviour
 
     public void DisconnectTrace()
     {
-        if (ShakeCam != null)
-        {
-            StopCoroutine(ShakeCam);
-        }
-        noise.m_AmplitudeGain = 0;
+        originGainValue = 0;
         inGameVirCam.transform.SetParent(null);
     }
 }

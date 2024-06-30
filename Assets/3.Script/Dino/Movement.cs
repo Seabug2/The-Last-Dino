@@ -14,7 +14,7 @@ public class Movement : MonoBehaviour
     [SerializeField]
     float anglerSpeed = 0;
 
-    const float offset = 25;
+    const float offset = 10;
 
     public void SetData(DinoData _DinoData)
     {

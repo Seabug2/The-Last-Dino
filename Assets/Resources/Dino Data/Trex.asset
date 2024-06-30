@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbb5a17710c4dc84684226ab5ea5b42a, type: 3}
   m_Name: Trex
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 8
   angluerSpeed: 0.8
   meatTime: 3
   parasolTime: 1

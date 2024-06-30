@@ -27,23 +27,20 @@ public class Meteor : MonoBehaviour
     [SerializeField]
     float delayTime = 30f;
 
-    public GameObject collisionPointMark;
-    public GameObject tails;
     public GameObject explosion;
-
-    private void Start()
+    public GameObject collisionPointMark;
+    
+    private void OnEnable()
     {
-        GameObject go = Instantiate(collisionPointMark);
-
         transform.forward = (Vector3.zero - transform.position).normalized;
 
         Ray ray = new Ray(transform.position, (Vector3.zero - transform.position).normalized);
-        if(Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, 100f, 1 << LayerMask.NameToLayer("Earth")))
+        if(Physics.Raycast(ray.origin, ray.direction, out RaycastHit hit, Mathf.Infinity, 1 << LayerMask.NameToLayer("Earth")))
         {
-            go.transform.position = (transform.position).normalized * 43.9f;
+            collisionPointMark.transform.position = (transform.position).normalized * 45f;
         }
-        go.transform.up = (transform.position).normalized;
-        collisionPointMark = go;
+        collisionPointMark.transform.up = (transform.position).normalized;
+        collisionPointMark.SetActive(true);
     }
 
     /// <summary>
@@ -64,7 +61,7 @@ public class Meteor : MonoBehaviour
         }
 
         NearGroundImpact();
-        Destroy(collisionPointMark);
+        collisionPointMark.SetActive(false);
     }
 
     void NearGroundImpact()
@@ -79,9 +76,9 @@ public class Meteor : MonoBehaviour
     void Explosion()
     {
         GameObject p = Instantiate(explosion);
-        p.transform.position = transform.position.normalized * 44.5f;
+        p.transform.position = transform.position.normalized * 45f;
         p.transform.up = transform.position.normalized;
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     IEnumerator DelayedExplosion_co()

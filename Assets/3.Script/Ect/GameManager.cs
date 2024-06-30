@@ -57,9 +57,6 @@ public class GameManager : MonoBehaviour
     public event UnityAction StartAction;
     public event UnityAction GameOverAction;
 
-    [SerializeField]
-    Animator blackBoard;
-
     public void QuitGame()
     {
 #if UNITY_EDITOR
@@ -74,10 +71,5 @@ public class GameManager : MonoBehaviour
     public void RestartScene()
     {
         SceneManager.LoadScene(0);
-    }
-
-    IEnumerator RestartScene_co()
-    {
-        yield return null;
     }
 }
