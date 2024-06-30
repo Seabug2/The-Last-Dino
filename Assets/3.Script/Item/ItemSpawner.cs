@@ -8,12 +8,13 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField] private float delayTime = 10f;
 
     int count = 3;
-    private SphereCollider area;
+    [SerializeField] private float respawnPos = 1;
+    [SerializeField] private float detectionRadius;
     private List<GameObject> ItemList = new List<GameObject>();
     
     private void Start()
     {
-        area = GetComponent<SphereCollider>();
+        
         ItemList.Add(meat);
         ItemList.Add(propeller);
         ItemList.Add(umbrella);
@@ -30,15 +31,21 @@ public class ItemSpawner : MonoBehaviour
 
     private IEnumerator ItemSpawner_co(float delayTime)
     {
-        for(int i = 0;i<count;i++)
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        
+        Collider[] hitColliders = Physics.OverlapSphere(ray.origin, detectionRadius, 2 << LayerMask.NameToLayer("Meteor"));
+
+        if (hitColliders.Length > 0)
         {
-            // Vector3 spawnPos =;
-            // GameObject instance = Instantiate(ItemList,spawnPos,Quaternion.identity)
 
-            Vector3 randomPos = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized*43.5f;
-            Instantiate(ItemList[Random.Range(0,ItemList.Count)], randomPos, Quaternion.identity);
+            for (int i = 0;i<count;i++)
+            {
+                    //Physics.OverlapSphere
+                    Vector3 randomPos = Random.onUnitSphere * respawnPos;
+                    //Vector3 randomPos = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized*43.5f;
+                    Instantiate(ItemList[Random.Range(0,ItemList.Count)], randomPos, Quaternion.identity);
+            }
         }
-
         yield return new WaitForSeconds(delayTime);
     }
     
