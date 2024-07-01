@@ -2712,7 +2712,7 @@ MonoBehaviour:
   SpawnTime: 2
   respawnHeight: 80
   screenwidth: 0
-  xOffset: 480
+  xOffset: 600
   screenHeight: 0
   yOffset: 20
   distanceFromCamera: 160

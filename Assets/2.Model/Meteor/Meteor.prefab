@@ -133,7 +133,7 @@ MonoBehaviour:
   shakeScale: {x: 12, y: 0.2}
   impactRange: 35
   explosionRange: 9.81
-  delayTime: 30
+  delayTime: 90
   explosion: {fileID: 227264478951622849, guid: 64dacc47807390447aa532b5a02a82b5, type: 3}
   collisionPointMark: {fileID: 903175773402691215}
 --- !u!114 &6964512870846105696

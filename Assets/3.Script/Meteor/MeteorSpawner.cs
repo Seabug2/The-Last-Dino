@@ -27,7 +27,7 @@ public class MeteorSpawner : MonoBehaviour
     private void Start()
     {
         screenwidth = Screen.width;
-        screenHeight= Screen.height;
+        screenHeight = Screen.height;
 
         GameManager.instance.StartAction += () =>
         {

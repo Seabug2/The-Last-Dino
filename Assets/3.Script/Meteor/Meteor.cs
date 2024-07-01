@@ -59,11 +59,12 @@ public class Meteor : MonoBehaviour
         }
         else
         {
-            //지구와 부딪힌 경우 잠시 후 폭발
-            StartCoroutine(DelayedExplosion_co());
+            gravity.Stop();
+            float rand = Random.Range(.5f, 1f);
+            Invoke("Explosion", delayTime * rand);
+            NearGroundImpact();
         }
 
-        NearGroundImpact();
         collisionPointMark.SetActive(false);
     }
 
@@ -94,15 +95,6 @@ public class Meteor : MonoBehaviour
         }
 
         gameObject.SetActive(false);
-    }
-
-    IEnumerator DelayedExplosion_co()
-    {
-        gravity.Stop();
-        float rand = Random.Range(.5f, 1f);
-        // 지정된 시간 후에 폭발
-        yield return new WaitForSeconds(delayTime * rand);
-        Explosion();
     }
 
     Vector3 vec = Vector3.zero;
